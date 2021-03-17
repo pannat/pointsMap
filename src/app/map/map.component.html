@@ -1,6 +1,28 @@
-<nz-card nzTitle="Area" class="map">
+<nz-card nzTitle="Polylines" class="map">
   <div nz-row>
-    <div nz-col [nzOffset]="12" [nzSpan]="12">
+    <div nz-col [nzSpan]="10">
+      <button nz-button (click)="addPolyline()">Add new polyline</button>
+      <nz-divider></nz-divider>
+
+      <ng-container *ngIf="polylines$ | async as polylines">
+        <nz-list *ngIf="polylines.length" nzBordered>
+          <nz-list-item *ngFor="let polyline of polylines">
+              <div nz-col [nzSpan]="16">
+                <input nz-input placeholder="Write name"/>
+              </div>
+              <div nz-col [nzOffset]="2" [nzSpan]="6">
+                <div nz-row nzJustify="space-between">
+                  <button nz-button nzType="primary">Save</button>
+                  <button nz-button nzType="danger">Delete</button>
+                </div>
+              </div>
+          </nz-list-item>
+        </nz-list>
+      </ng-container>
+
+
+    </div>
+    <div nz-col [nzOffset]="2" [nzSpan]="12">
       <div googleMap class="map__container" (addPoint)="onAddPoint($event)"></div>
     </div>
   </div>
